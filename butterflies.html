@@ -5,10 +5,74 @@
     <title>Butterflies per Province</title>
     <!-- <script src="d3/d3.js" charset="utf-8"/></script> -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+
+      #titleWrapper, #bodyTextWrapper {
+        width: 40%;
+        float: left;
+      }
+
+      #titleWrapper{
+        padding-left: 7%;
+      }
+
+      #bodyTextWrapper {
+        padding-top: 2%;
+      }
+
+      .title, .subtitle, .bodyText {
+        font-family:"Helvetica Neue";
+        font-weight:lighter!important;
+        color: gray!important;
+        padding-left: 3%;
+      }
+
+      .title {
+
+        font-size: 6em
+      }
+      .subtitle, .bodyText {
+
+        font-size: 2em
+      }
+      .bodyText {
+        font-size: 1.5em
+      }
+
+      body{
+        background-color: rgb(242, 242, 242);
+      }
+
+      #dataViz{
+        padding-top: 20px;
+        padding-left: 3%;
+      }
+
+      .orange {
+        color:#E09530!important;
+      }
+
+      .purple {
+        color:#8C6CAD!important;
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+
+
+    </style>
 
   </head>
   <body>
-
+    <div id="titleWrapper">
+      <div class="title orange">Heliconius &<br/></div>
+      <div class="title purple">Passifloras<br/></div>
+    </div>
+    <div id="bodyTextWrapper">
+      <div class="subtitle">Do <span class="orange underline">butterflies</span> love <span class="purple underline">passifloras</span>?</div></br>
+      <div class="bodyText">Correlation between Heliconius population size and hosted flowers (Passifloras)</div>
+    </div>
     <div id="dataViz">
 
     </div>
@@ -24,9 +88,8 @@
         d3.csv("datasets/flowersPerProvince.csv").then(function(flowerData){
 
         //Fix grandient scale - needs to be based on data
-        var butterflyColors = ["#6CC4D3","red","#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3"];
-        var flowerColors = ["#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3"];
-        var InitialAxis = 150; //circles initial position
+        var colors = ["#E09530","#8C6CAD"]; //orange(#D18C14), light blue(#8C6CAD), green (#B1DDB3)
+        var InitialAxis = 100; //circles initial position
         var labelOffset = 50;
 
         //Grouping total amount of butterflies by Provinces
@@ -50,21 +113,54 @@
           return d.key;
         });
 
+        //Creating flowers map for manipulation
+        var butterflyProvMap = d3.map(butterflyProvinces, function(d){
+          return d.key;
+        });
+
         //Defining X Scale
         var xScale = d3.scaleLinear()
           .domain([0,7])
-          .range([150,1500]);
+          .range([150,1400]);
 
         //Defining Radius Scale - Circle Size Scale
         var rScale = d3.scaleLinear()
           .domain([39,336])
-          .range([20,100]);
+          .range([20,80]);
+
+        //Axis Labels
+        // var graphLabel = ["Mariposas","Passifloras"];
+        // var axisGroups = canvas.append("g")
+        //   .attr("class","axisLabels")
+        //   .attr("transform",function(d,i) {
+        //     return "translate("+100+","+2*InitialAxis+")";
+        //   })
+        //   .selectAll(".axisLabels")
+        //   .data(graphLabel)
+        //   .enter()
+        //     .append("text")
+        //     .text(function(d,i) {
+        //       return d
+        //     })
+        //     .attr("text-anchor","middle")
+        //     .attr("y",function(d,i){
+        //       return rScale(336)+i*labelOffset;
+        //     })
+        //     .attr("fill","gray")
+        //     .attr("font-family","Helvetica Neue")
+        //     .attr("font-weight","lighter")
+        //     .attr("font-size",32)
+        //     .attr("fill",function(d,i){
+        //       return colors[i];
+        //     })
 
         //Creating groups (circles and labels)
-        var groups = canvas.selectAll("g")
+        var groups = canvas.selectAll(".provinceGroup")
+          // .data(flowerProvinces)
           .data(butterflyProvinces)
           .enter()
           .append("g")
+            .attr("class","provinceGroup")
             .attr("transform", function(d, i){
               return "translate("+xScale(i)+","+InitialAxis+")";
             })
@@ -72,8 +168,8 @@
             //Drawing butterfly circles
             groups.append("circle")
             .attr("fill",function(d,i) {
-              return butterflyColors[i]})
-            .attr("opacity","2")
+              return colors[0]})
+            .attr("opacity",".5")
             .attr("r", function(d, i){
               return rScale(d.values.length);
             })
@@ -81,9 +177,10 @@
             //Drawing flower circles
             groups.append("circle")
             .attr("fill",function(d,i) {
-              return flowerColors[i]})
+              return colors[1]})
             .attr("opacity","0.7")
             .attr("r", function(d, i){
+              // return rScale(butterflyProvMap.get(d.key).values.length);
               return rScale(flowerProvMap.get(d.key).values.length);
             })
 
@@ -114,10 +211,26 @@
               .attr("y",function(d,i){
                 return rScale(336)+(2*labelOffset);
               })
-              .attr("fill","gray")
+              .attr("fill",colors[0])
               .attr("font-weight","lighter")
               .attr("font-family","helvetica neue")
-              .attr("font-size",18)
+              .attr("font-size",18);
+
+              groups.append("text")
+                .text(function(d,i) {
+                  //change this to update label value
+                  //  butterfly = d.values.length
+                  //  flower = flowerProvinces.values.length
+                  return flowerProvMap.get(d.key).values.length
+                })
+                .attr("text-anchor","middle")
+                .attr("y",function(d,i){
+                  return rScale(336)+(3*labelOffset);
+                })
+                .attr("fill",colors[1])
+                .attr("font-weight","lighter")
+                .attr("font-family","helvetica neue")
+                .attr("font-size",18);
 
             })
         })
