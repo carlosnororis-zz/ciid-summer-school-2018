@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Butterflies per Province</title>
+    <!-- <script src="d3/d3.js" charset="utf-8"/></script> -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  </head>
+  <body>
+
+    <div id="dataViz">
+
+    </div>
+
+    <script type="text/javascript">
+
+      var canvas = d3.selectAll("#dataViz").append("svg") //creating svg canvas
+        .attr("width",1400)
+        .attr("height",500)
+
+      //Fetching datasets
+      d3.csv("datasets/butterfliesPerProvince.csv").then(function(butterflyData){
+        d3.csv("datasets/flowersPerProvince.csv").then(function(flowerData){
+
+        //Fix grandient scale - needs to be based on data
+        var butterflyColors = ["#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3","#6CC4D3"];
+        var flowerColors = ["#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3","#B1DDB3"];
+        var InitialAxis = 150; //circles initial position
+        var labelOffset = 50;
+
+        //Grouping total amount of butterflies by Provinces
+        var butterflyProvinces = d3.nest()
+          .key(function(d){ return d.Location})
+          .entries(butterflyData)
+          .sort(function(a,b) {
+            return d3.descending(a.values.length, b.values.length)
+          })
+
+        //Grouping total amount of flowers by Provinces
+        var flowerProvinces = d3.nest()
+          .key(function(d){ return d.StateProvince_GBIF})
+          .entries(flowerData)
+          .sort(function(a,b) {
+            return d3.descending(a.values.length, b.values.length)
+          })
+
+        //Creating flowers map for manipulation
+        var flowerProvMap = d3.map(flowerProvinces, function(d){
+          return d.key;
+        });
+
+        //Defining X Scale
+        var xScale = d3.scaleLinear()
+          .domain([0,7])
+          .range([150,1500]);
+
+        //Defining Radius Scale - Circle Size Scale
+        var rScale = d3.scaleLinear()
+          .domain([39,336])
+          .range([20,100]);
+
+        //Creating groups (circles and labels)
+        var groups = canvas.selectAll("g")
+          .data(butterflyProvinces)
+          .enter()
+          .append("g")
+            .attr("transform", function(d, i){
+              return "translate("+xScale(i)+","+InitialAxis+")";
+            })
+
+            //Drawing butterfly circles
+            groups.append("circle")
+            .attr("fill",function(d,i) {
+              return butterflyColors[i]})
+            .attr("opacity","2")
+            .attr("r", function(d, i){
+              return rScale(d.values.length);
+            })
+
+            //Drawing flower circles
+            groups.append("circle")
+            .attr("fill",function(d,i) {
+              return flowerColors[i]})
+            .attr("opacity","0.7")
+            .attr("r", function(d, i){
+              return rScale(flowerProvMap.get(d.key).values.length);
+            })
+
+            //Creating Province Label
+            groups.append("text")
+              .text(function(d,i) {
+                return d.key
+              })
+              .attr("text-anchor","middle")
+              .attr("y",function(d,i){
+                return rScale(336)+labelOffset;
+              })
+              .attr("fill","gray")
+              .attr("font-family","Helvetica Neue")
+              .attr("font-weight","lighter")
+              .attr("font-size",32)
+
+            //Creating Number Label
+            groups.append("text")
+              .text(function(d,i) {
+                //change this to update label value
+                //  butterfly = d.values.length
+                //  flower = flowerProvinces.values.length
+                return d.values.length
+                // return flowerProvMap.get(d.key).values.length
+              })
+              .attr("text-anchor","middle")
+              .attr("y",function(d,i){
+                return rScale(336)+(2*labelOffset);
+              })
+              .attr("fill","gray")
+              .attr("font-weight","lighter")
+              .attr("font-family","helvetica neue")
+              .attr("font-size",18)
+
+            })
+        })
+
+    </script>
+
+  </body>
+</html>
