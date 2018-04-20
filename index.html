@@ -13,7 +13,7 @@
 		<div id="wrapper">
 			<div class="section" id="sectionImage1" style="width:100%; height:100%; padding-left:3%; padding-right:1.5%;">
 				<div style="float: left; width: 36%;">
-					<div style="font-size: 80px; font-weight: bold; color:#1a1a1a;">Heliconius & Passifloras<br/></div>
+					<div style="font-size: 80px; font-weight: bold; color:#1a1a1a;"><span class="orange">Heliconius</span> & <span class="purple">Passifloras</span><br/></div>
 					<p style="font-size: 33.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040;">Fancy for butterflies & flowers</p><br/><br/>
 					<div class="bodyText"><div style="font-size: 16px; font-weight: bold; color:#1a1a1a;">What are Heliconius?</div></br>
 					A large Neotropical genus of long-winged butterflies that are often brilliantly colored or mimetic and that with related American butterflies constitute a subfamily of Nymphalidae or in some classifications the separate family Heliconiidae. (Just say butterflies)</br></br>
@@ -35,7 +35,7 @@
 					<p style="font-size: 33.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040; text-decoration:underline;">Population Sizes</p><br/>
 					<p style="font-size: 33.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040;">Do <span class="orange underline">butterflies</span> love <span class="purple underline">passifloras</span>?</p><br/>
 		      <div class="bflybodyText">Correlation between <span class="orange">Heliconius</span> and hosted <span class="purple">flowers (Passifloras)</span> population sizes.</div></br>
-					I will write the story later, but basically, orange circles represent butterflies population
+					I will tell you the story later, but basically, orange circles represent butterflies population
 					and purple circles represent flowers population.
 		    </div>
 		    <div id="dataViz">
@@ -90,7 +90,7 @@
 					<p class="bodyText">This project was created by Alejandra Saurez, Estefany Cen and Carlos Nororis</p>
 					<p style="font-size: 16px; font-weight: bold; color:#1a1a1a;">Disclaimer</p>
 					<p class="bodyText">This is a work in progress. A lot of ideas and core features are missing due to, hmmm,
-					lack of knowledge and/or practice :P. Anyways, we are just testing very basic
+					lack of technical knowledge and/or practice :P. Anyways, we are just testing very basic
 					D3/illustrator functionalities applied to data visualization techniques.
 
 					All the code that was modified as a base to create some of the elements of the
@@ -170,7 +170,7 @@
         //Defining Radius Scale - Circle Size Scale
         var rScale = d3.scaleLinear()
           .domain([39,336])
-          .range([20,80]);
+          .range([20,90]);
 
         //Creating groups (circles and labels)
         var groups = canvas.selectAll(".provinceGroup")
@@ -185,18 +185,20 @@
 
             //Drawing butterfly circles
             groups.append("circle")
-            .attr("fill",function(d,i) {
+            .attr("stroke",function(d,i) {
               return colors[0]})
-            .attr("opacity",".5")
+            .attr("stroke-width","4")
+						.attr("fill","none")
             .attr("r", function(d, i){
               return rScale(d.values.length);
             })
 
             //Drawing flower circles
             groups.append("circle")
-            .attr("fill",function(d,i) {
+            .attr("stroke",function(d,i) {
               return colors[1]})
-            .attr("opacity","0.7")
+						.attr("stroke-width","4")
+						.attr("fill","none")
             .attr("r", function(d, i){
               // return rScale(butterflyProvMap.get(d.key).values.length);
               return rScale(flowerProvMap.get(d.key).values.length);
