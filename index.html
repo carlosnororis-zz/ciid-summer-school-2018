@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="jquery-1.11.3.js"></script>
+		<script src="jquery.fullPage.min.js"></script>
+		<link rel="stylesheet" href="jquery.fullPage.css">
+		<link href="https://fonts.googleapis.com/css?family=Raleway|Oxigen|Open+Sans" rel="stylesheet">
+		<title>CII Summer School</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="section" id="sectionImage1" style="width:100%; height:100%; padding-left:3%; padding-right:1.5%;">
+				<div style="float: left; width: 47%;">
+					<div style="font-size: 80px; font-weight: bold; color:#1a1a1a;">Heliconius & Passifloras<br/></div>
+					<p style="font-size: 33.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040;">Fancy for butterflies & flowers</p><br/><br/>
+					<div class="bodyText"><div style="font-size: 16px; font-weight: bold; color:#1a1a1a;">What are Heliconius?</div></br>
+					A large Neotropical genus of long-winged butterflies that are often brilliantly colored or mimetic and that with related American butterflies constitute a subfamily of Nymphalidae or in some classifications the separate family Heliconiidae. (Just say butterflies)</br></br>
+					<div style="font-size: 16px; font-weight: bold; color:#1a1a1a;">What are Passifloras?</div></br>
+					Passiflora, known also as the passion flowers or passion vines, is a genus of about 550 species of flowering plants, the type genus of the family Passifloraceae. (Yep, you guessed it, just flowers)</br></br>
+					<div style="font-size: 16px; font-weight: bold; color:#1a1a1a;">What are the questions? </div></br>
+					&nbsp;&nbsp;&nbsp;&nbsp;1.	Do Heliconius like Passifloras?</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;2.	Does the amount of flowers impact the butterfly population?</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;2.	How does altitute relates to butterflies and hosted flowers?
+				</div>
+				</div>
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:3%; padding-right:1%; padding-top:5%;">
+
+				<div id="bflytitleWrapper">
+		      <div style="font-size: 80px; font-weight: bold; color:#1a1a1a;"><span class="orange">Heliconius</span> & <span class="purple">Passifloras</span><br/></div>
+		    </div>
+		    <div id="bflybodyTextWrapper">
+					<p style="font-size: 33.5px; -webkit-margin-before: 0.2em; -webkit-margin-after: 0.2em; color:#404040;">Do <span class="orange underline">butterflies</span> love <span class="purple underline">passifloras</span>?</p><br/><br/>
+		      <div class="bflybodyText">Correlation between Heliconius population size and hosted flowers (Passifloras)</div></br>
+					I will write the story tomorrow, but basically, orange circles represent butterflies population
+					and purple circles represent flowers population.
+		    </div>
+		    <div id="dataViz">
+
+		    </div>
+
+
+
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:2.5%; padding-right:7%;">
+
+				<div style="float: right; width: 30%;">
+
+					<!-- Ale's graph -->
+					<div style="font-size: 80px; font-weight: bold; color:#1a1a1a;">A cool visualization will live here soon!<br/></div>
+
+				</div>
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:3%; padding-right:1%;">
+
+				<div style="float: left; width: 30%;">
+					<!-- Steph's graph -->
+					<div style="font-size: 80px; font-weight: bold; color:#1a1a1a;">Another cool visualization will live here too! Stay tune :)<br/></div>
+
+				</div>
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:2.5%; padding-right:7%;">
+
+				<div style="float: right; width: 50%;">
+					<div style="padding-left:6%;">
+						<p style="font-size: 40px; font-weight: bold; color:#1a1a1a;">Resources</br></p>
+						<p style="font-size: 16px; font-weight: bold; color:#1a1a1a;">Links</p>
+						<p class="bodyText">- <a href=https://github.com/alvarotrigo/fullPage.js>FullPage.js</a></br>- <a href=https://d3js.org/>D3js.org</a></br>- <a href=https://fvargaspiedra.github.io/>Fertility Rate Visualization by Francisco Vargas</a></p>
+					</div>
+				</div>
+				<div style="float: left; width: 50%;">
+					<p style="font-size: 40px; font-weight: bold; color:#1a1a1a;">About the authors<br/></p>
+					<p style="font-size: 16px; font-weight: bold; color:#1a1a1a;">The purpose</p>
+					<p class="bodyText">This project is the result of Week 2 Workshop: Intro Data Visualization from CIID Summer School 2018.</p>
+					<p style="font-size: 16px; font-weight: bold; color:#1a1a1a;">The authors</p>
+					<p class="bodyText">This project was created by Alejandra Saurez, Estefani and Carlos Nororis</p>
+					<p style="font-size: 16px; font-weight: bold; color:#1a1a1a;">Disclaimer</p>
+					<p class="bodyText">This is a work in progress. A lot of ideas and core features are missing due to, hmmm,
+					lack of knowledge and/or practice :P. Anyways, we are just testing very basic
+					D3/illustrator functionalities applied to data visualization techniques.
+
+					All the code that was modified as a base to create some of the elements of the
+					visualization is under the MIT Open License and each reference is expose in the next column.</p>
+				</div>
+			</div>
+			</div>
+			<div class="section" style="width:100%; height:100%; padding-left:3%; padding-right:7%;">
+
+			</div>
+		</div>
+		<a id="footer" href="#About">About this visualization</a>
+		<script>
+
+			// ***************************************************
+			// ************ Initialize fullpage.js ***************
+			// ***************************************************
+
+			$(document).ready(function() {
+				$('#wrapper').fullpage({
+					sectionsColor: ['#ffffff', '#ffffff', '#f2f2f2', '#ffffff', '#f2f2f2'],
+					navigation: true,
+					navigationPosition: 'right',
+					navigationTooltips: ['Intro', 'Provinces', 'Altitute', 'Altitute Take 2', 'About'],
+					anchors:['Intro', 'Provinces', 'Altitute', 'Altitute Take 2', 'About']
+				});
+			});
+
+			// ***************************************************
+			// ************ Graph Drawing ***************
+			// ***************************************************
+
+			var canvas = d3.selectAll("#dataViz").append("svg") //creating svg canvas
+        .attr("width",1400)
+        .attr("height",450)
+
+      //Fetching datasets
+      d3.csv("https://carlosnororis.github.io/ciid-summer-school-2018/datasets/butterfliesPerProvince.csv").then(function(butterflyData){
+        d3.csv("https://carlosnororis.github.io/ciid-summer-school-2018/datasets/flowersPerProvince.csv").then(function(flowerData){
+
+        //Fix grandient scale - needs to be based on data
+        var colors = ["#E09530","#8C6CAD"]; //orange(#E09530), purple(#8C6CAD)
+        var InitialAxis = 100; //circles initial position
+        var labelOffset = 50;
+
+        //Grouping total amount of butterflies by Provinces
+        var butterflyProvinces = d3.nest()
+          .key(function(d){ return d.Location})
+          .entries(butterflyData)
+          .sort(function(a,b) {
+            return d3.descending(a.values.length, b.values.length)
+          })
+
+        //Grouping total amount of flowers by Provinces
+        var flowerProvinces = d3.nest()
+          .key(function(d){ return d.StateProvince_GBIF})
+          .entries(flowerData)
+          .sort(function(a,b) {
+            return d3.descending(a.values.length, b.values.length)
+          })
+
+        //Creating flowers map for manipulation
+        var flowerProvMap = d3.map(flowerProvinces, function(d){
+          return d.key;
+        });
+
+        //Creating flowers map for manipulation
+        var butterflyProvMap = d3.map(butterflyProvinces, function(d){
+          return d.key;
+        });
+
+        //Defining X Scale
+        var xScale = d3.scaleLinear()
+          .domain([0,7])
+          .range([150,1400]);
+
+        //Defining Radius Scale - Circle Size Scale
+        var rScale = d3.scaleLinear()
+          .domain([39,336])
+          .range([20,80]);
+
+        //Axis Labels
+        // var graphLabel = ["Mariposas","Passifloras"];
+        // var axisGroups = canvas.append("g")
+        //   .attr("class","axisLabels")
+        //   .attr("transform",function(d,i) {
+        //     return "translate("+100+","+2*InitialAxis+")";
+        //   })
+        //   .selectAll(".axisLabels")
+        //   .data(graphLabel)
+        //   .enter()
+        //     .append("text")
+        //     .text(function(d,i) {
+        //       return d
+        //     })
+        //     .attr("text-anchor","middle")
+        //     .attr("y",function(d,i){
+        //       return rScale(336)+i*labelOffset;
+        //     })
+        //     .attr("fill","gray")
+        //     .attr("font-family","Helvetica Neue")
+        //     .attr("font-weight","lighter")
+        //     .attr("font-size",32)
+        //     .attr("fill",function(d,i){
+        //       return colors[i];
+        //     })
+
+        //Creating groups (circles and labels)
+        var groups = canvas.selectAll(".provinceGroup")
+          // .data(flowerProvinces)
+          .data(butterflyProvinces)
+          .enter()
+          .append("g")
+            .attr("class","provinceGroup")
+            .attr("transform", function(d, i){
+              return "translate("+xScale(i)+","+InitialAxis+")";
+            })
+
+            //Drawing butterfly circles
+            groups.append("circle")
+            .attr("fill",function(d,i) {
+              return colors[0]})
+            .attr("opacity",".5")
+            .attr("r", function(d, i){
+              return rScale(d.values.length);
+            })
+
+            //Drawing flower circles
+            groups.append("circle")
+            .attr("fill",function(d,i) {
+              return colors[1]})
+            .attr("opacity","0.7")
+            .attr("r", function(d, i){
+              // return rScale(butterflyProvMap.get(d.key).values.length);
+              return rScale(flowerProvMap.get(d.key).values.length);
+            })
+
+            //Creating Province Label
+            groups.append("text")
+              .text(function(d,i) {
+                return d.key
+              })
+              .attr("text-anchor","middle")
+              .attr("y",function(d,i){
+                return rScale(336)+labelOffset;
+              })
+              .attr("fill","gray")
+              .attr("font-family","Helvetica Neue")
+              .attr("font-weight","lighter")
+              .attr("font-size",32)
+
+            //Creating Number Label
+            groups.append("text")
+              .text(function(d,i) {
+                //change this to update label value
+                //  butterfly = d.values.length
+                //  flower = flowerProvinces.values.length
+                return d.values.length
+                // return flowerProvMap.get(d.key).values.length
+              })
+              .attr("text-anchor","middle")
+              .attr("y",function(d,i){
+                return rScale(336)+(2*labelOffset);
+              })
+              .attr("fill",colors[0])
+              .attr("font-weight","lighter")
+              .attr("font-family","helvetica neue")
+              .attr("font-size",18);
+
+              groups.append("text")
+                .text(function(d,i) {
+                  //change this to update label value
+                  //  butterfly = d.values.length
+                  //  flower = flowerProvinces.values.length
+                  return flowerProvMap.get(d.key).values.length
+                })
+                .attr("text-anchor","middle")
+                .attr("y",function(d,i){
+                  return rScale(336)+(3*labelOffset);
+                })
+                .attr("fill",colors[1])
+                .attr("font-weight","lighter")
+                .attr("font-family","helvetica neue")
+                .attr("font-size",18);
+
+            })
+        })
+
+		</script>
+	</body>
+</html>
