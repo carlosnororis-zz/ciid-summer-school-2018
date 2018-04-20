@@ -28,9 +28,9 @@
       }
 
       .title {
-
         font-size: 6em
       }
+
       .subtitle, .bodyText {
 
         font-size: 2em
@@ -41,6 +41,8 @@
 
       body{
         background-color: rgb(242, 242, 242);
+        padding-top: 5%;
+        padding-left: 3%;
       }
 
       #dataViz{
@@ -58,8 +60,8 @@
 
       .underline {
         text-decoration: underline;
+        text-decoration-style: :
       }
-
 
     </style>
 
@@ -81,7 +83,7 @@
 
       var canvas = d3.selectAll("#dataViz").append("svg") //creating svg canvas
         .attr("width",1400)
-        .attr("height",500)
+        .attr("height",450)
 
       //Fetching datasets
       d3.csv("datasets/butterfliesPerProvince.csv").then(function(butterflyData){
